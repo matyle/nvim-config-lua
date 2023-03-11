@@ -22,6 +22,7 @@ local astro_plugins = {
   -- Optimiser
   ["lewis6991/impatient.nvim"] = {},
   ["brglng/vim-im-select"] = {},
+  ["lervag/vimtex"] = {},
 
   -- Lua functions
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },

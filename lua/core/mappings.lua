@@ -413,3 +413,76 @@ maps.n["<leader>uy"] = { function() astronvim.ui.toggle_syntax() end, desc = "To
 maps.n["<leader>uN"] = { function() astronvim.ui.toggle_ui_notifications() end, desc = "Toggle UI notifications" }
 
 astronvim.set_mappings(astronvim.user_plugin_opts("mappings", maps))
+
+
+
+---run 
+vim.api.nvim_set_keymap('n', '<leader>ru', ':lua CompileRunGcc()<cr>', { noremap = true, silent = true })
+
+function CompileRunGcc()
+    vim.cmd('w')
+    local filetype = vim.bo.filetype
+
+    if filetype == 'c' then
+        vim.fn.system('g++ % -o %<')
+        vim.fn.system('time ./%<')
+    elseif filetype == 'cpp' then
+        vim.cmd('set splitbelow')
+        vim.fn.system('g++ -std=c++11 % -Wall -o %<')
+        vim.cmd('sp')
+        vim.cmd('res -15')
+        vim.fn.system('./%<')
+    elseif filetype == 'cs' then
+        vim.cmd('set splitbelow')
+        vim.fn.system('mcs %')
+        vim.cmd('sp')
+        vim.cmd('res -5')
+        vim.fn.system('mono %<.exe')
+    elseif filetype == 'java' then
+        vim.cmd('set splitbelow')
+        vim.cmd('sp')
+        vim.cmd('res -5')
+        vim.fn.system('javac % && time java %<')
+    elseif filetype == 'sh' then
+        vim.fn.system('time bash %')
+    elseif filetype == 'python' then
+        vim.cmd('set splitbelow')
+        vim.cmd('sp')
+        vim.cmd('term python3 %')
+    elseif filetype == 'html' then
+        vim.fn.system(g.mkdp_browser .. ' % &')
+    elseif filetype == 'markdown' then
+        vim.cmd('MarkdownPreview')
+    elseif filetype == 'tex' then
+        vim.fn['vimtex#compiler#compile']()
+    elseif filetype == 'javascript' then
+        vim.cmd('set splitbelow')
+        vim.cmd('sp')
+        vim.cmd('term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .')
+    elseif filetype == 'go' then
+        vim.cmd('set splitbelow')
+        vim.cmd('sp')
+        vim.cmd('term go run .')
+    end
+end
+
+
+-- vimtex
+vim.g.tex_flavor = 'latex'
+vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_view_general_viewer = 'zathura'
+vim.g.vimtex_syntax_conceal_disable = 1
+
+vim.g.vimtex_toc_config = {
+    name = 'TOC',
+    layers = {'content', 'todo', 'include'},
+    split_width = 25,
+    todo_sorted = 0,
+    show_help = 1,
+    show_numbers = 1,
+}
+
+vim.api.nvim_buf_set_keymap(0, 'n', 'tc', ':VimtexTocToggle<CR>', {noremap = true})
+vim.api.nvim_buf_set_keymap(0, 'n', 'to', ':VimtexTocOpen<CR>', {noremap = true})
+vim.api.nvim_buf_set_keymap(0, 'n', 'tv', ':VimtexView<CR>', {noremap = true})
+
