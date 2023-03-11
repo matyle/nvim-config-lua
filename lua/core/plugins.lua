@@ -23,16 +23,24 @@ local astro_plugins = {
   ["lewis6991/impatient.nvim"] = {},
   ["brglng/vim-im-select"] = {},
   ["lervag/vimtex"] = {},
+  ["buoto/gotests-vim"] = {},
+  ["kevinhwang91/rnvimr"] = {},
+  --editor
+  ["jiangmiao/auto-pairs"] = {},
+  ["mg979/vim-visual-multi"] = {},
 
+-- Plug 'tpope/vim-surround' " type ysw' to wrap the word with '' or type cs'` to change 'word' to `word`
+  ["tpope/vim-surround"] = {},
+  
+-- Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
+ -- ["gcmt/wildfire.vim"] = {},
 
   -- find and replce
   ["brooth/far.vim"] = {},
 
 
-  ["vim-wakatime"] = {
+  ["wakatime/vim-wakatime"] = {
     loaded = true,
-    path = "/Users/matytan/.local/share/nvim/site/pack/packer/start/vim-wakatime",
-    url = "git@github.com/wakatime/vim-wakatime"
   },
 
   -- Lua functions
