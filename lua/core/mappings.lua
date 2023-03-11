@@ -25,13 +25,32 @@ maps.n["sk"] = { "<cmd>set splitbelow<cr><cmd>split<cr>", desc = "Horizontal Spl
 maps.n["sh"] = { "<cmd>set nosplitright<cr><cmd>vsplit<cr><cmd>set splitright<cr>", desc = "Vertical Split" }
 maps.n["sl"] = { "<cmd>set splitright<cr><cmd>vsplit<cr>", desc = "Vertical Split" }
 
---
+-- move
 maps.n["J"] = {"6j",desc="Move Down Fast"}
 maps.n["K"] = {"6k",desc="Move Up Fast"}
 
-
 -- inoremap <C-a> <ESC>A
 maps.i["<C-a>"] = { "<ESC>A", desc = "Insert at the end of the line" }
+
+-- cnoremap <C-a> <Home>
+-- cnoremap <C-e> <End>
+-- cnoremap <C-p> <Up>
+-- cnoremap <C-n> <Down>
+-- cnoremap <C-b> <Left>
+-- cnoremap <C-f> <Right>
+-- cnoremap <M-b> <S-Left>
+-- cnoremap <M-w> <S-Right>
+vim.api.nvim_set_keymap("c", "<C-a>", "<Home>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-e>", "<End>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-p>", "<Up>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-n>", "<Down>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-b>", "<Left>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-f>", "<Right>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<M-b>", "<S-Left>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<M-w>", "<S-Right>", { noremap = true, silent = true })
+
+
+-- noremap <LEADER>ru :call CompileRunGcc()<CR>
 
 
 --Create a new tab with tu
