@@ -32,8 +32,8 @@ local astro_plugins = {
 -- Plug 'tpope/vim-surround' " type ysw' to wrap the word with '' or type cs'` to change 'word' to `word`
   ["tpope/vim-surround"] = {},
   
--- Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp
- -- ["gcmt/wildfire.vim"] = {},
+-- Plug 'gcmt/wildfire.vim' " in Visual mode, type k' to select all text in '', or type k) k] k} kp cr
+ ["gcmt/wildfire.vim"] = {},
 
   -- find and replce
   ["brooth/far.vim"] = {},
