@@ -13,11 +13,87 @@ maps.n["gx"] = { function() astronvim.system_open() end, desc = "Open the file u
 -- maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
 -- maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
 -- maps.n["Q"] = "<Nop>"
-maps.n["|"] = { "<cmd>vsplit<cr>", desc = "Vertical Split" }
-maps.n["\\"] = { "<cmd>split<cr>", desc = "Horizontal Split" }
+
+
+-- " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
+-- noremap sj :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+-- noremap sk :set splitbelow<CR>:split<CR>
+-- noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+-- noremap sl :set splitright<CR>:vsplit<CR>
+maps.n["sj"] = { "<cmd>set nosplitbelow<cr><cmd>split<cr><cmd>set splitbelow<cr>", desc = "Horizontal Split" }
+maps.n["sk"] = { "<cmd>set splitbelow<cr><cmd>split<cr>", desc = "Horizontal Split" }
+maps.n["sh"] = { "<cmd>set nosplitright<cr><cmd>vsplit<cr><cmd>set splitright<cr>", desc = "Vertical Split" }
+maps.n["sl"] = { "<cmd>set splitright<cr><cmd>vsplit<cr>", desc = "Vertical Split" }
+
+--
 maps.n["J"] = {"6j",desc="Move Down Fast"}
 maps.n["K"] = {"6k",desc="Move Up Fast"}
 
+
+-- inoremap <C-a> <ESC>A
+maps.i["<C-a>"] = { "<ESC>A", desc = "Insert at the end of the line" }
+
+
+--Create a new tab with tu
+-- noremap tu :tabe<CR>
+-- noremap tU :tab split<CR>
+-- " Move around tabs with tn and ti
+-- noremap th :-tabnext<CR>
+-- noremap tl :+tabnext<CR>
+-- " Move the tabs with tmn and tmi
+-- noremap tmh :-tabmove<CR>
+-- noremap tml :+tabmove<CR>
+maps.n["tu"] = { "<cmd>tabe<cr>", desc = "New Tab" }
+maps.n["tU"] = { "<cmd>tab split<cr>", desc = "New Tab Split" }
+maps.n["th"] = { "<cmd>-tabnext<cr>", desc = "Previous Tab" }
+maps.n["tl"] = { "<cmd>+tabnext<cr>", desc = "Next Tab" }
+maps.n["tmh"] = { "<cmd>-tabmove<cr>", desc = "Move Tab Left" }
+maps.n["tml"] = { "<cmd>+tabmove<cr>", desc = "Move Tab Right" }
+
+-- " Spelling Check with <space>sc
+-- noremap <LEADER>sc :set spell!<CR>
+maps.n["<leader>sc"] = { "<cmd>set spell!<cr>", desc = "Toggle Spell Check" }
+
+
+-- " Copy to system clipboard
+-- noremap Y "+y
+-- nnoremap P "*p
+
+maps.n["Y"] = { '"+y', desc = "Copy to system clipboard" }
+maps.n["P"] = { '"*p', desc = "Paste from system clipboard" }
+
+-- " ===
+-- " === Terminal Behaviors
+-- " ===
+-- let g:neoterm_autoscroll = 1
+-- autocmd TermOpen term://* startinsert
+-- tnoremap <C-N> <C-\><C-N>
+-- tnoremap <C-O> <C-\><C-K><C-O>
+-- noremap <C-\> :ToggleTerm size=15<CR>
+-- nnoremap <F9> :exec exists('syntax_on') ? 'syn off': 'syn on'<CR>
+-- noremap ,\ :FloatermToggle<CR>
+vim.api.nvim_set_var("neoterm_autoscroll", 1)
+vim.api.nvim_exec([[
+  autocmd TermOpen term://* startinsert
+]], false)
+maps.t["<C-N>"] = { "<C-\\><C-N>", desc = "Terminal Normal Mode" }
+maps.t["<C-O>"] = { "<C-\\><C-K><C-O>", desc = "Terminal Normal Mode" }
+maps.n["<C-\\>"] = { "<cmd>ToggleTerm size=15<cr>", desc = "Terminal Toggle" }
+maps.n["<F9>"] = { "<cmd>exec exists('syntax_on') ? 'syn off': 'syn on'<cr>", desc = "Toggle Syntax" }
+maps.n[",\\"] = { "<cmd>FloatermToggle<cr>", desc = "Terminal Toggle" }
+
+
+-- " Open the vimrc file anytime
+-- noremap <LEADER>rc :e $HOME/.config/nvim/init.vim<CR>
+-- noremap <LEADER>rd :e $HOME/.config/nvim/README.md<CR>
+-- "
+maps.n["<leader>rc"] = { "<cmd>e $HOME/.config/nvim/lua/core/mappings.lua<cr>", desc = "Open init.lua" }
+maps.n["<leader>rd"] = { "<cmd>e $HOME/.config/nvim/README.md<cr>", desc = "Open README.md" }
+--
+-- " Delete find pair
+-- nnoremap dy d%
+maps.n["dy"] = { "d%", desc = "Delete find pair"}
+--
 -- Packer
 maps.n["<leader>pc"] = { "<cmd>PackerCompile<cr>", desc = "Packer Compile" }
 maps.n["<leader>pi"] = { "<cmd>PackerInstall<cr>", desc = "Packer Install" }
