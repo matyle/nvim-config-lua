@@ -24,6 +24,17 @@ local astro_plugins = {
   ["brglng/vim-im-select"] = {},
   ["lervag/vimtex"] = {},
 
+
+  -- find and replce
+  ["brooth/far.vim"] = {},
+
+
+  ["vim-wakatime"] = {
+    loaded = true,
+    path = "/Users/matytan/.local/share/nvim/site/pack/packer/start/vim-wakatime",
+    url = "git@github.com/wakatime/vim-wakatime"
+  },
+
   -- Lua functions
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
 

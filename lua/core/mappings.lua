@@ -486,3 +486,5 @@ vim.api.nvim_buf_set_keymap(0, 'n', 'tc', ':VimtexTocToggle<CR>', {noremap = tru
 vim.api.nvim_buf_set_keymap(0, 'n', 'to', ':VimtexTocOpen<CR>', {noremap = true})
 vim.api.nvim_buf_set_keymap(0, 'n', 'tv', ':VimtexView<CR>', {noremap = true})
 
+
+vim.api.nvim_set_keymap('n', '<leader>fr', ':Farr<CR>', {silent = true})
