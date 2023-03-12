@@ -82,7 +82,7 @@ maps.n["Y"] = { '"+y', desc = "Copy to system clipboard" }
 maps.n["P"] = { '"*p', desc = "Paste from system clipboard" }
 
 -- " ===
--- " === Terminal Behaviors
+--" === Terminal Behaviors
 -- " ===
 -- let g:neoterm_autoscroll = 1
 -- autocmd TermOpen term://* startinsert
