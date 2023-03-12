@@ -22,7 +22,7 @@ vim.cmd([[
     set listchars=tab:\|\ ,trail:▫
     set scrolloff=4
     set ttimeoutlen=0
-    set notimeout
+   " set notimeout
     set viewoptions=cursor,folds,slash,unix
     set wrap
     set tw=0
@@ -38,7 +38,7 @@ vim.cmd([[
     set wildignore+=*/node_modules/*,*/.git/*,.DS_Store,*/venv/*,*/__pycache__/*,*.pyc
     " 避免当行过长卡顿
     set showcmd
-    set wildmenu
+    " set wildmenu
     set ignorecase
     set smartcase
     set shortmess+=c
@@ -57,7 +57,7 @@ vim.cmd([[
     set undodir=$HOME/.config/nvim/tmp/undo,.
     set colorcolumn=100
     set updatetime=100
-    set virtualedit=block
+    " set virtualedit=block
 
 ]])
 
