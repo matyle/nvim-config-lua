@@ -10,8 +10,6 @@ vim.cmd([[
     autocmd FocusLost,BufLeave * silent! update
     let &t_ut=''
     set autochdir
-" 只有一个全局的 status line，而不是每一个 window 一个
-    set laststatus=3
     set hidden
     set noexpandtab
     set tabstop=2
@@ -35,26 +33,22 @@ vim.cmd([[
     set splitbelow
     set noshowmode
     set wildignore+=*/node_modules/*,*/.git/*,.DS_Store,*/venv/*,*/__pycache__/*,*.pyc
-    " 避免当行过长卡顿
     set showcmd
     " set wildmenu
-    set ignorecase
-    set smartcase
+    set regexpengine=1        " use old regexp engine
+    set ignorecase smartcase  " ignore case only when the pattern contains no capital letters 
     set shortmess+=c
     set inccommand=split
     set completeopt=longest,noinsert,menuone,noselect,preview
     set ttyfast "should make scrolling faster
     set lazyredraw "same as above
     set visualbell
-    " 让退出 vim 之后 undo 消息不消失
     set colorcolumn=100
-    set updatetime=100
     " set virtualedit=block
 
 ]])
 
 
--- let g:im_select_default = 'com.apple.keylayout.ABC'
 vim.g.im_select_default = "com.apple.keylayout.ABC"
 
 
