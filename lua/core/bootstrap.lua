@@ -22,7 +22,6 @@ vim.cmd([[
     set listchars=tab:\|\ ,trail:▫
     set scrolloff=4
     set ttimeoutlen=0
-   " set notimeout
     set viewoptions=cursor,folds,slash,unix
     set wrap
     set tw=0
@@ -47,14 +46,7 @@ vim.cmd([[
     set ttyfast "should make scrolling faster
     set lazyredraw "same as above
     set visualbell
-    silent !mkdir -p $HOME/.config/nvim/tmp/backup
-    silent !mkdir -p $HOME/.config/nvim/tmp/undo
-    "silent !mkdir -p $HOME/.config/nvim/tmp/sessions
-    set backupdir=$HOME/.config/nvim/tmp/backup,.
-    set directory=$HOME/.config/nvim/tmp/backup,.
     " 让退出 vim 之后 undo 消息不消失
-    set undofile
-    set undodir=$HOME/.config/nvim/tmp/undo,.
     set colorcolumn=100
     set updatetime=100
     " set virtualedit=block
