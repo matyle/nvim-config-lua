@@ -10,6 +10,11 @@ maps.n["Q"] = { "<cmd>x<cr>", desc = "Quit save" }
 maps.n["<leader>h"] = { "<cmd>nohlsearch<cr>", desc = "No Highlight" } -- TODO: REMOVE IN v3
 maps.n["<leader>fn"] = { "<cmd>enew<cr>", desc = "New File" }
 maps.n["gx"] = { function() astronvim.system_open() end, desc = "Open the file under cursor with system app" }
+
+
+-- noremap \s :%s//g<left><left>
+vim.api.nvim_set_keymap("n", "\\s", ":%s//g<left><left>", { noremap = true})
+-- maps.n["\s"] = { "<cmd>%s//g<left><left>", desc = "Replace all" }
 -- maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
 -- maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
 -- maps.n["Q"] = "<Nop>"
@@ -62,13 +67,13 @@ vim.api.nvim_set_keymap("c", "<M-w>", "<S-Right>", { noremap = true, silent = tr
 -- " Move the tabs with tmn and tmi
 -- noremap tmh :-tabmove<CR>
 -- noremap tml :+tabmove<CR>
-maps.n["tu"] = { "<cmd>tabe<cr>", desc = "New Tab" }
-maps.n["tU"] = { "<cmd>tab split<cr>", desc = "New Tab Split" }
-maps.n["th"] = { "<cmd>-tabnext<cr>", desc = "Previous Tab" }
-maps.n["tl"] = { "<cmd>+tabnext<cr>", desc = "Next Tab" }
-maps.n["tmh"] = { "<cmd>-tabmove<cr>", desc = "Move Tab Left" }
-maps.n["tml"] = { "<cmd>+tabmove<cr>", desc = "Move Tab Right" }
-
+-- maps.n["tu"] = { "<cmd>tabe<cr>", desc = "New Tab" }
+-- maps.n["tU"] = { "<cmd>tab split<cr>", desc = "New Tab Split" }
+-- maps.n["th"] = { "<cmd>-tabnext<cr>", desc = "Previous Tab" }
+-- maps.n["tl"] = { "<cmd>+tabnext<cr>", desc = "Next Tab" }
+-- maps.n["tmh"] = { "<cmd>-tabmove<cr>", desc = "Move Tab Left" }
+-- maps.n["tml"] = { "<cmd>+tabmove<cr>", desc = "Move Tab Right" }
+--
 -- " Spelling Check with <space>sc
 -- noremap <LEADER>sc :set spell!<CR>
 maps.n["<leader>sc"] = { "<cmd>set spell!<cr>", desc = "Toggle Spell Check" }
@@ -135,8 +140,8 @@ if vim.g.heirline_bufferline then
   -- Manage Buffers
   maps.n["<leader>c"] = { function() astronvim.close_buf(0) end, desc = "Close buffer" }
   maps.n["<leader>C"] = { function() astronvim.close_buf(0, true) end, desc = "Force close buffer" }
-  maps.n["<S-l>"] = { function() astronvim.nav_buf(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" }
-  maps.n["<S-h>"] =
+  maps.n["tl"] = { function() astronvim.nav_buf(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" }
+  maps.n["th"] =
     { function() astronvim.nav_buf(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Previous buffer" }
   maps.n[">b"] =
     { function() astronvim.move_buf(vim.v.count > 0 and vim.v.count or 1) end, desc = "Move buffer tab right" }
@@ -185,13 +190,13 @@ else -- TODO v3: remove this else block
 
   -- Navigate buffers
   if is_available "bufferline.nvim" then
-    maps.n["<S-l>"] = { "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer tab" }
-    maps.n["<S-h>"] = { "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer tab" }
+    maps.n["tl"] = { "<cmd>BufferLineCycleNext<cr>", desc = "Next buffer tab" }
+    maps.n["th"] = { "<cmd>BufferLineCyclePrev<cr>", desc = "Previous buffer tab" }
     maps.n[">b"] = { "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer tab right" }
     maps.n["<b"] = { "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer tab left" }
   else
-    maps.n["<S-l>"] = { "<cmd>bnext<cr>", desc = "Next buffer" }
-    maps.n["<S-h>"] = { "<cmd>bprevious<cr>", desc = "Previous buffer" }
+    maps.n["tl"] = { "<cmd>bnext<cr>", desc = "Next buffer" }
+    maps.n["th"] = { "<cmd>bprevious<cr>", desc = "Previous buffer" }
   end
 end
 
@@ -223,7 +228,7 @@ end
 
 -- NeoTree
 if is_available "neo-tree.nvim" then
-  maps.n["<leader>e"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
+  maps.n["tt"] = { "<cmd>Neotree toggle<cr>", desc = "Toggle Explorer" }
   maps.n["<leader>o"] = { "<cmd>Neotree focus<cr>", desc = "Focus Explorer" }
 end
 
