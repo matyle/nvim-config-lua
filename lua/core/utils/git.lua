@@ -6,7 +6,8 @@
 -- @copyright 2022
 -- @license GNU General Public License v3.0
 
-local git = { url = "https://github.com/" }
+-- local git = { url = "https://github.com/" }
+local git = { url = "git@github.com/" }
 
 --- Run a git command from the AstroNvim installation directory
 -- @param args the git arguments

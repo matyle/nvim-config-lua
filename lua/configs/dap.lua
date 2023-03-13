@@ -1,3 +1,45 @@
-local dap = require "dap"
-dap.adapters = astronvim.user_plugin_opts("dap.adapters", dap.adapters)
-dap.configurations = astronvim.user_plugin_opts("dap.configurations", dap.configurations)
+local status_ok, _ = pcall(require, "dap")
+if not status_ok then
+	require("utils.notify").notify("Plugin dap is not existed", "error", "Plugin")
+	return
+end
+
+local M = {}
+
+local function config_dap(dap, dap_ui)
+	-- ---------------------dap icons  configuration ----------------------------
+
+	vim.fn.sign_define("DapBreakpoint", { text = " ", texthl = "debugBreakpoint", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointCondition", { text = " ", texthl = "DiagnosticWarn", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapBreakpointRejected", { text = " ", texthl = "DiagnosticError", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapLogPoint", { text = " ", texthl = "debugBreakpoint", linehl = "", numhl = "" })
+	vim.fn.sign_define("DapStopped", { text = "", texthl = "debugBreakpoint", linehl = "debugPC", numhl = "" })
+
+	dap.listeners.after["event_initialized"]["dapui"] = function()
+		dap_ui.open()
+	end
+	dap.listeners.after["event_terminated"]["dapui"] = function()
+		dap_ui.close()
+		vim.cmd("bd! \\[dap-repl]")
+	end
+
+	dap.listeners.before["event_progressStart"]["progress-notifications"] = require("utils.notify").event_progressStart
+	dap.listeners.before["event_progressUpdate"]["progress-notifications"] =
+		require("utils.notify").event_progressUpdate
+	dap.listeners.before["event_progressEnd"]["progress-notifications"] = require("utils.notify").event_progressEnd
+
+	-- dap.adapters["xxx"] = ""
+	for language, dapconfig in pairs(require("user.dap.init")) do
+		dap.adapters[language] = dapconfig.adapters
+		dap.configurations[language] = dapconfig.configurations
+	end
+end
+
+function M.setup()
+	local dap = require("dap")
+	local dap_ui = require("dapui")
+	config_dap(dap, dap_ui)
+	-- require("user.keybinds.dap").key_binds(dap, dap_ui)
+end
+
+return M

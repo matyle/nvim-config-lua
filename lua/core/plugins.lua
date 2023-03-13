@@ -24,7 +24,9 @@ local astro_plugins = {
   ["brglng/vim-im-select"] = {},
   ["lervag/vimtex"] = {},
   ["buoto/gotests-vim"] = {},
-  ["kevinhwang91/rnvimr"] = {},
+  ["kevinhwang91/rnvimr"] = {
+    config = function() require "configs.rnvimr" end,
+  },
   ["APZelos/blamer.nvim"] = {
     config = function() require "configs.blamer" end
   },
