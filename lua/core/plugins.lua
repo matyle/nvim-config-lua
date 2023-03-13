@@ -25,6 +25,9 @@ local astro_plugins = {
   ["lervag/vimtex"] = {},
   ["buoto/gotests-vim"] = {},
   ["kevinhwang91/rnvimr"] = {},
+  ["APZelos/blamer.nvim"] = {
+    config = function() require "configs.blamer" end
+  },
   --editor
   ["jiangmiao/auto-pairs"] = {},
   ["mg979/vim-visual-multi"] = {},
