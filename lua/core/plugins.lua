@@ -20,9 +20,7 @@ local astro_plugins = {
   },
   -- Optimiser
   ["lewis6991/impatient.nvim"] = {},
-  -- ["dense-analysis/neural"] = {
-  --   config = function() require "configs.neural" end,
-  -- },
+  ["MunifTanjim/nui.nvim"] = {},
   ["jackMort/ChatGPT.nvim"] = {
     config = function() require "configs.chatgpt" end,
     requires = {
