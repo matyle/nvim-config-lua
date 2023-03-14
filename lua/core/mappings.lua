@@ -13,7 +13,7 @@ maps.n["gx"] = { function() astronvim.system_open() end, desc = "Open the file u
 
 
 -- noremap \s :%s//g<left><left>
-vim.api.nvim_set_keymap("n", "\\s", ":%s//g<left><left>", { noremap = true})
+vim.api.nvim_set_keymap("n", "\\s", ":%s//g<left><left>", { noremap = true })
 -- maps.n["\s"] = { "<cmd>%s//g<left><left>", desc = "Replace all" }
 -- maps.n["<C-s>"] = { "<cmd>w!<cr>", desc = "Force write" }
 -- maps.n["<C-q>"] = { "<cmd>q!<cr>", desc = "Force quit" }
@@ -31,8 +31,10 @@ maps.n["sh"] = { "<cmd>set nosplitright<cr><cmd>vsplit<cr><cmd>set splitright<cr
 maps.n["sl"] = { "<cmd>set splitright<cr><cmd>vsplit<cr>", desc = "Vertical Split" }
 
 -- move
-maps.n["J"] = {"6j",desc="Move Down Fast"}
-maps.n["K"] = {"6k",desc="Move Up Fast"}
+maps.n["J"] = { "6j", desc = "Move Down Fast" }
+maps.n["K"] = { "6k", desc = "Move Up Fast" }
+maps.v["J"] = { "6j", desc = "Move Down Fast" }
+maps.v["K"] = { "6k", desc = "Move Up Fast" }
 
 -- inoremap <C-a> <ESC>A
 maps.i["<C-a>"] = { "<ESC>A", desc = "Insert at the end of the line" }
@@ -116,7 +118,7 @@ maps.n["<leader>rd"] = { "<cmd>e $HOME/.config/nvim/README.md<cr>", desc = "Open
 --
 -- " Delete find pair
 -- nnoremap dy d%
-maps.n["dy"] = { "d%", desc = "Delete find pair"}
+maps.n["dy"] = { "d%", desc = "Delete find pair" }
 --
 -- Packer
 maps.n["<leader>pc"] = { "<cmd>PackerCompile<cr>", desc = "Packer Compile" }
@@ -142,11 +144,11 @@ if vim.g.heirline_bufferline then
   maps.n["<leader>C"] = { function() astronvim.close_buf(0, true) end, desc = "Force close buffer" }
   maps.n["tl"] = { function() astronvim.nav_buf(vim.v.count > 0 and vim.v.count or 1) end, desc = "Next buffer" }
   maps.n["th"] =
-    { function() astronvim.nav_buf(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Previous buffer" }
+  { function() astronvim.nav_buf(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Previous buffer" }
   maps.n[">b"] =
-    { function() astronvim.move_buf(vim.v.count > 0 and vim.v.count or 1) end, desc = "Move buffer tab right" }
+  { function() astronvim.move_buf(vim.v.count > 0 and vim.v.count or 1) end, desc = "Move buffer tab right" }
   maps.n["<b"] =
-    { function() astronvim.move_buf(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Move buffer tab left" }
+  { function() astronvim.move_buf(-(vim.v.count > 0 and vim.v.count or 1)) end, desc = "Move buffer tab left" }
 
   maps.n["<leader>bb"] = {
     function()
@@ -239,7 +241,7 @@ if is_available "neovim-session-manager" then
   maps.n["<leader>Sd"] = { "<cmd>SessionManager! delete_session<cr>", desc = "Delete session" }
   maps.n["<leader>Sf"] = { "<cmd>SessionManager! load_session<cr>", desc = "Search sessions" }
   maps.n["<leader>S."] =
-    { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
+  { "<cmd>SessionManager! load_current_dir_session<cr>", desc = "Load current directory session" }
 end
 
 -- Package Manager
@@ -301,7 +303,7 @@ if is_available "telescope.nvim" then
   maps.n["<leader>fm"] = { function() require("telescope.builtin").marks() end, desc = "Search marks" }
   maps.n["<leader>fo"] = { function() require("telescope.builtin").oldfiles() end, desc = "Search history" }
   maps.n["<leader>fc"] =
-    { function() require("telescope.builtin").grep_string() end, desc = "Search for word under cursor" }
+  { function() require("telescope.builtin").grep_string() end, desc = "Search for word under cursor" }
   maps.n["<leader>sb"] = { function() require("telescope.builtin").git_branches() end, desc = "Git branches" }
   maps.n["<leader>sh"] = { function() require("telescope.builtin").help_tags() end, desc = "Search help" }
   maps.n["<leader>sm"] = { function() require("telescope.builtin").man_pages() end, desc = "Search man" }
@@ -310,7 +312,7 @@ if is_available "telescope.nvim" then
   maps.n["<leader>sc"] = { function() require("telescope.builtin").commands() end, desc = "Search commands" }
   if astronvim.is_available "nvim-notify" then
     maps.n["<leader>sn"] =
-      { function() require("telescope").extensions.notify.notify() end, desc = "Search notifications" }
+    { function() require("telescope").extensions.notify.notify() end, desc = "Search notifications" }
   end
   maps.n["<leader>ls"] = {
     function()
@@ -358,7 +360,7 @@ if is_available "nvim-dap" then
   -- modified function keys found with `showkey -a` in the terminal to get key code
   -- run `nvim -V3log +quit` and search through the "Terminal info" in the `log` file for the correct keyname
   maps.n["<F5>"] = { function() require("dap").continue() end, desc = "Debugger: Start" }
-  maps.n["<F17>"] = { function() require("dap").terminate() end, desc = "Debugger: Stop" } -- Shift+F5
+  maps.n["<F17>"] = { function() require("dap").terminate() end, desc = "Debugger: Stop" }        -- Shift+F5
   maps.n["<F29>"] = { function() require("dap").restart_frame() end, desc = "Debugger: Restart" } -- Control+F5
   maps.n["<F6>"] = { function() require("dap").pause() end, desc = "Debugger: Pause" }
   maps.n["<F9>"] = { function() require("dap").toggle_breakpoint() end, desc = "Debugger: Toggle Breakpoint" }
@@ -421,56 +423,55 @@ astronvim.set_mappings(astronvim.user_plugin_opts("mappings", maps))
 
 
 
----run 
+---run
 vim.api.nvim_set_keymap('n', '<leader>ru', ':lua CompileRunGcc()<cr>', { noremap = true, silent = true })
 
 function CompileRunGcc()
-    vim.cmd('w')
-    local filetype = vim.bo.filetype
+  vim.cmd('w')
+  local filetype = vim.bo.filetype
 
-    if filetype == 'c' then
-        vim.fn.system('g++ % -o %<')
-        vim.fn.system('time ./%<')
-    elseif filetype == 'cpp' then
-        vim.cmd('set splitbelow')
-        vim.fn.system('g++ -std=c++11 % -Wall -o %<')
-        vim.cmd('sp')
-        vim.cmd('res -15')
-        vim.fn.system('./%<')
-    elseif filetype == 'cs' then
-        vim.cmd('set splitbelow')
-        vim.fn.system('mcs %')
-        vim.cmd('sp')
-        vim.cmd('res -5')
-        vim.fn.system('mono %<.exe')
-    elseif filetype == 'java' then
-        vim.cmd('set splitbelow')
-        vim.cmd('sp')
-        vim.cmd('res -5')
-        vim.fn.system('javac % && time java %<')
-    elseif filetype == 'sh' then
-        vim.fn.system('time bash %')
-    elseif filetype == 'python' then
-        vim.cmd('set splitbelow')
-        vim.cmd('sp')
-        vim.cmd('term python3 %')
-    elseif filetype == 'html' then
-        vim.fn.system(g.mkdp_browser .. ' % &')
-    elseif filetype == 'markdown' then
-        vim.cmd('MarkdownPreview')
-    elseif filetype == 'tex' then
-        vim.fn['vimtex#compiler#compile']()
-    elseif filetype == 'javascript' then
-        vim.cmd('set splitbelow')
-        vim.cmd('sp')
-        vim.cmd('term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .')
-    elseif filetype == 'go' then
-        vim.cmd('set splitbelow')
-        vim.cmd('sp')
-        vim.cmd('term go run .')
-    end
+  if filetype == 'c' then
+    vim.fn.system('g++ % -o %<')
+    vim.fn.system('time ./%<')
+  elseif filetype == 'cpp' then
+    vim.cmd('set splitbelow')
+    vim.fn.system('g++ -std=c++11 % -Wall -o %<')
+    vim.cmd('sp')
+    vim.cmd('res -15')
+    vim.fn.system('./%<')
+  elseif filetype == 'cs' then
+    vim.cmd('set splitbelow')
+    vim.fn.system('mcs %')
+    vim.cmd('sp')
+    vim.cmd('res -5')
+    vim.fn.system('mono %<.exe')
+  elseif filetype == 'java' then
+    vim.cmd('set splitbelow')
+    vim.cmd('sp')
+    vim.cmd('res -5')
+    vim.fn.system('javac % && time java %<')
+  elseif filetype == 'sh' then
+    vim.fn.system('time bash %')
+  elseif filetype == 'python' then
+    vim.cmd('set splitbelow')
+    vim.cmd('sp')
+    vim.cmd('term python3 %')
+  elseif filetype == 'html' then
+    vim.fn.system(g.mkdp_browser .. ' % &')
+  elseif filetype == 'markdown' then
+    vim.cmd('MarkdownPreview')
+  elseif filetype == 'tex' then
+    vim.fn['vimtex#compiler#compile']()
+  elseif filetype == 'javascript' then
+    vim.cmd('set splitbelow')
+    vim.cmd('sp')
+    vim.cmd('term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .')
+  elseif filetype == 'go' then
+    vim.cmd('set splitbelow')
+    vim.cmd('sp')
+    vim.cmd('term go run .')
+  end
 end
-
 
 -- vimtex
 vim.g.tex_flavor = 'latex'
@@ -479,22 +480,20 @@ vim.g.vimtex_view_general_viewer = 'zathura'
 vim.g.vimtex_syntax_conceal_disable = 1
 
 vim.g.vimtex_toc_config = {
-    name = 'TOC',
-    layers = {'content', 'todo', 'include'},
-    split_width = 25,
-    todo_sorted = 0,
-    show_help = 1,
-    show_numbers = 1,
+  name = 'TOC',
+  layers = { 'content', 'todo', 'include' },
+  split_width = 25,
+  todo_sorted = 0,
+  show_help = 1,
+  show_numbers = 1,
 }
 
-vim.api.nvim_buf_set_keymap(0, 'n', 'tc', ':VimtexTocToggle<CR>', {noremap = true})
-vim.api.nvim_buf_set_keymap(0, 'n', 'to', ':VimtexTocOpen<CR>', {noremap = true})
-vim.api.nvim_buf_set_keymap(0, 'n', 'tv', ':VimtexView<CR>', {noremap = true})
+vim.api.nvim_buf_set_keymap(0, 'n', 'tc', ':VimtexTocToggle<CR>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, 'n', 'to', ':VimtexTocOpen<CR>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, 'n', 'tv', ':VimtexView<CR>', { noremap = true })
 
 
 --far 全局查找替换
-vim.api.nvim_set_keymap('n', '<leader>fr', ':Farr<CR>', {noremap = true,silent = true})
+vim.api.nvim_set_keymap('n', '<leader>fr', ':Farr<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>tr', ':RnvimrToggle<CR>', {noremap = true, silent = true})
-
-
+vim.api.nvim_set_keymap('n', '<leader>tr', ':RnvimrToggle<CR>', { noremap = true, silent = true })
