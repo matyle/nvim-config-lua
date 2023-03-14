@@ -22,7 +22,7 @@ local astro_plugins = {
   ["lewis6991/impatient.nvim"] = {},
   ["MunifTanjim/nui.nvim"] = {},
   ["jackMort/ChatGPT.nvim"] = {
-    config = function() require "configs.chatgpt" end,
+    -- config = function() require "configs.chatgpt" end,
     requires = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
