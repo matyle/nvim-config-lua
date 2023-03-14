@@ -20,6 +20,17 @@ local astro_plugins = {
   },
   -- Optimiser
   ["lewis6991/impatient.nvim"] = {},
+  -- ["dense-analysis/neural"] = {
+  --   config = function() require "configs.neural" end,
+  -- },
+  ["jackMort/ChatGPT.nvim"] = {
+    config = function() require "configs.chatgpt" end,
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  },
   ["brglng/vim-im-select"] = {},
   ["lervag/vimtex"] = {},
   ["buoto/gotests-vim"] = {},
@@ -41,6 +52,8 @@ local astro_plugins = {
   ["wakatime/vim-wakatime"] = {
     loaded = true,
   },
+  ---highlight
+  ["RRethy/vim-illuminate"] = {},
   -- Lua functions
   ["nvim-lua/plenary.nvim"] = { module = "plenary" },
   -- Indent detection
