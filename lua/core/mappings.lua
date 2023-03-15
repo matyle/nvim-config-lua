@@ -497,3 +497,19 @@ vim.api.nvim_buf_set_keymap(0, 'n', 'tv', ':VimtexView<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>fr', ':Farr<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<leader>tr', ':RnvimrToggle<CR>', { noremap = true, silent = true })
+
+
+--fzf
+-- nnoremap <c-p> :Leaderf file<CR>
+-- " noremap <silent> <C-p> :Files<CR>
+-- noremap <silent> <C-f> :Rg<CR>
+-- noremap <silent> <C-h> :History<CR>
+-- "noremap <C-t> :BTags<CR>
+-- " noremap <silent> <C-l> :Lines<CR>
+-- noremap <silent> <C-w> :Buffers<CR>
+-- noremap <leader>; :History:<CR>
+--
+-- vim.api.nvim_set_keymap('n', '<c-p>', ':Files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<c-f>', ':Rg<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<c-w>', ':Buffers<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fa', ':History:<CR>', { noremap = true, silent = true })

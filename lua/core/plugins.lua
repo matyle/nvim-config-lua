@@ -47,6 +47,8 @@ local astro_plugins = {
   ["gcmt/wildfire.vim"] = {},
   -- find and replce
   ["brooth/far.vim"] = {},
+  ["junegunn/fzf.vim"] = {},
+  ["junegunn/fzf"] = {},
   ["wakatime/vim-wakatime"] = {
     loaded = true,
   },
