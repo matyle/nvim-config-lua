@@ -21,14 +21,18 @@ local astro_plugins = {
   -- Optimiser
   ["lewis6991/impatient.nvim"] = {},
   ["MunifTanjim/nui.nvim"] = {},
-  -- ["jackMort/ChatGPT.nvim"] = {
-  --   -- config = function() require "configs.chatgpt" end,
-  --   requires = {
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-lua/plenary.nvim",
-  --     "nvim-telescope/telescope.nvim"
-  --   }
-  -- },
+  ["jackMort/ChatGPT.nvim"] = {
+    requires = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  },
+  ["sindrets/diffview.nvim"] = {
+    requires = {
+      "nvim-lua/plenary.nvim",
+    }
+  },
   ["brglng/vim-im-select"] = {},
   ["lervag/vimtex"] = {},
   ["buoto/gotests-vim"] = {},
