@@ -4,6 +4,7 @@ local colorscheme = astronvim.user_plugin_opts("colorscheme", nil, false)
 vim.cmd.colorscheme(vim.tbl_contains(vim.fn.getcompletion("", "color"), colorscheme) and colorscheme or "default_theme")
 vim.cmd([[
     set autoread
+    set fillchars+=diff:╱
     " set OPENAI_API_KEY = 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
     au FocusGained,BufEnter * :checktime
     " 当失去焦点或者离开当前的 buffer 的时候保存
@@ -57,6 +58,3 @@ vim.cmd([[
 
 -- let g:im_select_default = 'com.apple.keylayout.ABC'
 vim.g.im_select_default = "com.apple.keylayout.ABC"
-
-
-

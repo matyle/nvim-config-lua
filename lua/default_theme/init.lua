@@ -15,29 +15,30 @@ for _, module in ipairs { "base", "lsp" } do
 end
 
 for plugin, enabled in
-  pairs(user_plugin_opts("default_theme.plugins", {
-    aerial = true,
-    beacon = false,
-    bufferline = true, -- TODO v3: make this false
-    cmp = true,
-    dapui = true,
-    dashboard = true,
-    gitsigns = true,
-    highlighturl = true,
-    hop = false,
-    indent_blankline = true,
-    lightspeed = false,
-    ["neo-tree"] = true,
-    notify = true,
-    ["nvim-tree"] = false,
-    ["nvim-web-devicons"] = true,
-    rainbow = true,
-    symbols_outline = false,
-    telescope = true,
-    treesitter = true,
-    vimwiki = false,
-    ["which-key"] = true,
-  }))
+pairs(user_plugin_opts("default_theme.plugins", {
+  aerial = true,
+  beacon = false,
+  bufferline = true, -- TODO v3: make this false
+  cmp = true,
+  dapui = true,
+  dashboard = true,
+  gitsigns = true,
+  highlighturl = true,
+  hop = false,
+  indent_blankline = true,
+  lightspeed = false,
+  ["neo-tree"] = true,
+  notify = true,
+  ["nvim-tree"] = false,
+  ["nvim-web-devicons"] = true,
+  rainbow = true,
+  symbols_outline = false,
+  telescope = true,
+  treesitter = true,
+  vimwiki = false,
+  diffview = true,
+  ["which-key"] = true,
+}))
 do
   if enabled then highlights = vim.tbl_deep_extend("force", highlights, require("default_theme.plugins." .. plugin)) end
 end

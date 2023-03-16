@@ -29,6 +29,7 @@ local astro_plugins = {
     }
   },
   ["sindrets/diffview.nvim"] = {
+    config = function() require "configs.diffview" end,
     requires = {
       "nvim-lua/plenary.nvim",
     }
