@@ -1,7 +1,5 @@
 docs
 ginit.vim
-lua/packer_compiled.lua
-lua/user
 plugin
 ftplugin
 spell
