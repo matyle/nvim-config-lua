@@ -236,7 +236,6 @@ cmd("AstroVersion", function() require("astronvim.utils.updater").version() end,
 
 ---user
 vim.cmd([[
-    au FocusGained,BufEnter * :checktime
     " 当失去焦点或者离开当前的 buffer 的时候保存
     set autowrite
     autocmd FocusLost,BufLeave * silent! update
