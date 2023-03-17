@@ -12,7 +12,7 @@ return {
   },
   {
     "windwp/nvim-autopairs",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     opts = {
       check_ts = true,
       ts_config = { java = false },
@@ -28,6 +28,7 @@ return {
         highlight_grey = "LineNr",
       },
     },
+    lazy = false,
     config = require "plugins.configs.nvim-autopairs",
   },
   {

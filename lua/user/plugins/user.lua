@@ -66,6 +66,10 @@ return {
   },
   {
     "nvim-lua/plenary.nvim",
+  },
+  {
+    "lervag/vimtex",
+    lazy = false,
   }
 
 
