@@ -19,10 +19,20 @@ return {
   },
   build = ":TSUpdate",
   opts = {
-    highlight = { enable = true },
+    highlight = {
+      enable = true,
+      additional_vim_regex_highlighting = false,
+    },
     incremental_selection = { enable = true },
     autotag = { enable = true },
     context_commentstring = { enable = true, enable_autocmd = false },
+    indent = { enable = false },
+    rainbow = {
+      enable = true,
+      disable = { "html" },
+      extended_mode = false,
+      max_file_lines = nil,
+    },
   },
   config = require "plugins.configs.nvim-treesitter",
 }

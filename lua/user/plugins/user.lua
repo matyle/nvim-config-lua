@@ -80,6 +80,10 @@ return {
   {
     "junegunn/limelight.vim",
     lazy = false,
+  },
+  {
+    "monkoose/matchparen.nvim",
+    lazy = false
   }
 
 
