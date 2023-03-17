@@ -43,8 +43,8 @@ return {
     "wakatime/vim-wakatime",
   },
   {
+    ft = "go",
     "buoto/gotests-vim",
-    lazy = false,
   },
   {
     "tpope/vim-surround"
@@ -55,7 +55,7 @@ return {
   },
   {
     "jackMort/ChatGPT.nvim",
-    lazy = false,
+    cmd = "ChatGPT",
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-telescope/telescope.nvim",
@@ -70,7 +70,18 @@ return {
   {
     "lervag/vimtex",
     ft = "tex",
+    "mg979/vim-visual-multi",
+    lazy = false,
+  },
+  {
+    "RRethy/vim-illuminate",
+    lazy = false,
+  },
+  {
+    "junegunn/limelight.vim",
+    lazy = false,
   }
+
 
 
 
