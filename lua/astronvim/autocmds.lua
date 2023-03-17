@@ -220,6 +220,15 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
   end,
 })
 
+autocmd("FocusLost,BufLeave", {
+  desc = "Save when losing focus or leaving the current buffer",
+  group = augroup("auto_save", { clear = true }),
+  callback = function()
+    vim.cmd("silent! update")
+  end,
+})
+
+
 cmd(
   "AstroChangelog",
   function() require("astronvim.utils.updater").changelog() end,
@@ -234,10 +243,5 @@ cmd("AstroRollback", function() require("astronvim.utils.updater").rollback() en
 cmd("AstroUpdate", function() require("astronvim.utils.updater").update() end, { desc = "Update AstroNvim" })
 cmd("AstroVersion", function() require("astronvim.utils.updater").version() end, { desc = "Check AstroNvim Version" })
 
----user
-vim.cmd([[
-    " 当失去焦点或者离开当前的 buffer 的时候保存
-    set autowrite
-    autocmd FocusLost,BufLeave * silent! update
-]])
+
 vim.g.im_select_default = "com.apple.keylayout.ABC"
