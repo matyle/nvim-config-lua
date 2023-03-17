@@ -382,6 +382,130 @@ maps.n["K"] = { "6k", desc = "Move Up Fast" }
 maps.v["J"] = { "6j", desc = "Move Down Fast" }
 maps.v["K"] = { "6k", desc = "Move Up Fast" }
 
+--- save
+maps.n["S"] = { "<cmd>w<cr>", desc = "Save" }
+maps.n["Q"] = { "<cmd>x<cr>", desc = "Quit save" }
 
+---edit
+vim.api.nvim_set_keymap("n", "\\s", ":%s//g<left><left>", { noremap = true })
+maps.n["Y"] = { '"+y', desc = "Copy to system clipboard" }
+maps.n["P"] = { '"*p', desc = "Paste from system clipboard" }
+
+---cmd
+vim.api.nvim_set_keymap("c", "<C-a>", "<Home>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-e>", "<End>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-p>", "<Up>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-n>", "<Down>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-b>", "<Left>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<C-f>", "<Right>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<M-b>", "<S-Left>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("c", "<M-w>", "<S-Right>", { noremap = true, silent = true })
+
+--terminal
+vim.api.nvim_exec([[
+  autocmd TermOpen term://* startinsert
+]], false)
+
+maps.t["<C-N>"] = { "<C-\\><C-N>", desc = "Terminal Normal Mode" }
+maps.t["<C-O>"] = { "<C-\\><C-K><C-O>", desc = "Terminal Normal Mode" }
+maps.n["<C-\\>"] = { "<cmd>ToggleTerm size=15<cr>", desc = "Terminal Toggle" }
+maps.n["<F9>"] = { "<cmd>exec exists('syntax_on') ? 'syn off': 'syn on'<cr>", desc = "Toggle Syntax" }
+maps.n[",\\"] = { "<cmd>FloatermToggle<cr>", desc = "Terminal Toggle" }
+
+
+---run
+vim.api.nvim_set_keymap('n', '<leader>ru', ':lua CompileRunGcc()<cr>', { noremap = true, silent = true })
+
+function CompileRunGcc()
+  vim.cmd('w')
+  local filetype = vim.bo.filetype
+
+  if filetype == 'c' then
+    vim.fn.system('g++ % -o %<')
+    vim.fn.system('time ./%<')
+  elseif filetype == 'cpp' then
+    vim.cmd('set splitbelow')
+    vim.fn.system('g++ -std=c++11 % -Wall -o %<')
+    vim.cmd('sp')
+    vim.cmd('res -15')
+    vim.fn.system('./%<')
+  elseif filetype == 'cs' then
+    vim.cmd('set splitbelow')
+    vim.fn.system('mcs %')
+    vim.cmd('sp')
+    vim.cmd('res -5')
+    vim.fn.system('mono %<.exe')
+  elseif filetype == 'java' then
+    vim.cmd('set splitbelow')
+    vim.cmd('sp')
+    vim.cmd('res -5')
+    vim.fn.system('javac % && time java %<')
+  elseif filetype == 'sh' then
+    vim.fn.system('time bash %')
+  elseif filetype == 'python' then
+    vim.cmd('set splitbelow')
+    vim.cmd('sp')
+    vim.cmd('term python3 %')
+  elseif filetype == 'html' then
+    vim.fn.system(g.mkdp_browser .. ' % &')
+  elseif filetype == 'markdown' then
+    vim.cmd('MarkdownPreview')
+  elseif filetype == 'tex' then
+    vim.fn['vimtex#compiler#compile']()
+  elseif filetype == 'javascript' then
+    vim.cmd('set splitbelow')
+    vim.cmd('sp')
+    vim.cmd('term export DEBUG="INFO,ERROR,WARNING"; node --trace-warnings .')
+  elseif filetype == 'go' then
+    vim.cmd('set splitbelow')
+    vim.cmd('sp')
+    vim.cmd('term go run .')
+  end
+end
+
+-- vimtex
+vim.g.tex_flavor = 'latex'
+vim.g.vimtex_view_method = 'zathura'
+vim.g.vimtex_view_general_viewer = 'zathura'
+vim.g.vimtex_syntax_conceal_disable = 1
+
+vim.g.vimtex_toc_config = {
+  name = 'TOC',
+  layers = { 'content', 'todo', 'include' },
+  split_width = 25,
+  todo_sorted = 0,
+  show_help = 1,
+  show_numbers = 1,
+}
+
+vim.api.nvim_buf_set_keymap(0, 'n', 'tc', ':VimtexTocToggle<CR>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, 'n', 'to', ':VimtexTocOpen<CR>', { noremap = true })
+vim.api.nvim_buf_set_keymap(0, 'n', 'tv', ':VimtexView<CR>', { noremap = true })
+
+
+--far 全局查找替换
+vim.api.nvim_set_keymap('n', '<leader>fr', ':Farr<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>tr', ':RnvimrToggle<CR>', { noremap = true, silent = true })
+
+
+--fzf
+-- nnoremap <c-p> :Leaderf file<CR>
+-- " noremap <silent> <C-p> :Files<CR>
+-- noremap <silent> <C-f> :Rg<CR>
+-- noremap <silent> <C-h> :History<CR>
+-- "noremap <C-t> :BTags<CR>
+-- " noremap <silent> <C-l> :Lines<CR>
+-- noremap <silent> <C-w> :Buffers<CR>
+-- noremap <leader>; :History:<CR>
+--
+-- vim.api.nvim_set_keymap('n', '<c-p>', ':Files<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<c-f>', ':Rg<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<c-w>', ':Buffers<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>fa', ':History:<CR>', { noremap = true, silent = true })
+
+
+---diffview
+vim.api.nvim_set_keymap('n', '<leader>gh', ':DiffviewFileHistory<CR>', { noremap = true, silent = true })
 
 utils.set_mappings(astronvim.user_opts("mappings", maps))
