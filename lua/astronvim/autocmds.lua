@@ -227,6 +227,16 @@ autocmd("FocusLost,BufLeave", {
     vim.cmd("silent! update")
   end,
 })
+-- autocmd FileType text setlocal textwidth =78
+-- 如果是latex文件，每行最多80个字符
+autocmd("FileType", {
+  desc = "Set textwidth for latex files",
+  group = augroup("latex_textwidth", { clear = true }),
+  pattern = "tex",
+  callback = function()
+    vim.opt_local.textwidth = 80
+  end,
+})
 
 
 cmd(
@@ -243,5 +253,10 @@ cmd("AstroRollback", function() require("astronvim.utils.updater").rollback() en
 cmd("AstroUpdate", function() require("astronvim.utils.updater").update() end, { desc = "Update AstroNvim" })
 cmd("AstroVersion", function() require("astronvim.utils.updater").version() end, { desc = "Check AstroNvim Version" })
 
+
+
+vim.cmd([[
+  autocmd FileType tex   set textwidth=80
+]])
 
 vim.g.im_select_default = "com.apple.keylayout.ABC"

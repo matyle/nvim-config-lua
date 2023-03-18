@@ -20,6 +20,8 @@ return {
     blamer_show_in_visual_modes = 0,
     blamer_show_in_insert_modes = 0,
     blamer_date_format = '%Y-%m-%d %H:%M:%S',
+    vimtex_view_general_viewer = 'zathura',
+    vimtex_view_method = "zathura",
   },
 }
 -- If you need more control, you can use the function()...end notation

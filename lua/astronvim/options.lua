@@ -11,6 +11,8 @@ local options = astronvim.user_opts("options", {
     completeopt = { "menuone", "noselect" },                    -- Options for insert mode completion
     copyindent = true,                                          -- Copy the previous indentation on autoindenting
     cursorline = true,                                          -- Highlight the text line of the cursor
+    autoindent = true,                                          -- Autoindent new lines
+    smartindent = true,                                         -- Smart autoindentation
     expandtab = true,                                           -- Enable the use of space in tab
     fileencoding = "utf-8",                                     -- File content encoding for the buffer
     fillchars = { eob = " " },                                  -- Disable `~` on nonexistent lines
