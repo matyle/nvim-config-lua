@@ -227,6 +227,14 @@ autocmd("FocusLost,BufLeave", {
     vim.cmd("silent! update")
   end,
 })
+
+autocmd("InsertLeave", {
+  desc = "Save when leaving insert mode",
+  group = augroup("auto_save", { clear = true }),
+  callback = function()
+    vim.cmd("silent! update")
+  end,
+})
 -- autocmd FileType text setlocal textwidth =78
 -- 如果是latex文件，每行最多80个字符
 autocmd("FileType", {
