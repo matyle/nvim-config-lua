@@ -10,6 +10,7 @@ return {
   --   end,
   -- },
 
+  -- theme
   {
     "folke/tokyonight.nvim",
     lazy = false,    -- make sure we load this during startup if it is your main colorscheme
@@ -18,6 +19,12 @@ return {
       -- load the colorscheme here
       vim.cmd([[colorscheme tokyonight]])
     end,
+  },
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    lazy = false,
+    priority = 1000,
   },
   {
     "APZelos/blamer.nvim",
@@ -36,7 +43,7 @@ return {
   },
   {
     "brooth/far.vim",
-    cmd = "Farr",
+    lazy = false,
   },
   {
     event = "InsertEnter",
@@ -85,7 +92,6 @@ return {
     "monkoose/matchparen.nvim",
     lazy = false
   }
-
 
 
 
