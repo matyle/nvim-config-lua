@@ -60,17 +60,17 @@ return {
     "brglng/vim-im-select",
     lazy = false,
   },
-  {
-    "jackMort/ChatGPT.nvim",
-    cmd = "ChatGPT",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = function()
-      require "user.plugins.configs.chatgpt"
-    end,
-  },
+  -- {
+  --   "jackMort/ChatGPT.nvim",
+  --   cmd = "ChatGPT",
+  --   dependencies = {
+  --     "MunifTanjim/nui.nvim",
+  --     "nvim-telescope/telescope.nvim",
+  --   },
+  --   config = function()
+  --     require "user.plugins.configs.chatgpt"
+  --   end,
+  -- },
   {
     "nvim-lua/plenary.nvim",
   },
@@ -89,10 +89,12 @@ return {
     lazy = false,
   },
   {
-    "monkoose/matchparen.nvim",
-    lazy = false
+    "sindrets/diffview.nvim"
+  },
+  {
+    "kevinhwang91/rnvimr",
+    cmd = "RnvimrToggle",
   }
-
 
 
 
