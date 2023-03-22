@@ -77,6 +77,8 @@ return {
   {
     "lervag/vimtex",
     ft = "tex",
+  },
+  {
     "mg979/vim-visual-multi",
     lazy = false,
   },
