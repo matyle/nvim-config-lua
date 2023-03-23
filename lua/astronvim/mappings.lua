@@ -262,6 +262,15 @@ if is_available "telescope.nvim" then
     end,
     desc = "Find words in all files",
   }
+  ---find open file
+  maps.n["<leader>fp"] = {
+    function()
+      require("telescope.builtin").live_grep {
+        grep_open_files = true,
+      }
+    end,
+    desc = "Find words in open file"
+  }
   maps.n["<leader>l"] = sections.l
   maps.n["<leader>lD"] = { function() require("telescope.builtin").diagnostics() end, desc = "Search diagnostics" }
   maps.n["<leader>ls"] = {
