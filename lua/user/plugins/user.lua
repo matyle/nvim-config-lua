@@ -54,7 +54,8 @@ return {
     "buoto/gotests-vim",
   },
   {
-    "tpope/vim-surround"
+    "tpope/vim-surround",
+    lazy = false,
   },
   {
     "brglng/vim-im-select",
