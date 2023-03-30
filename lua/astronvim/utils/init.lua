@@ -42,13 +42,22 @@ end
 --- Get highlight properties for a given highlight name
 -- @param name highlight group name
 -- @return table of highlight group properties
+
 function M.get_hlgroup(name, fallback)
   if vim.fn.hlexists(name) == 1 then
-    local hl = vim.api.nvim_get_hl_by_name(name, vim.o.termguicolors)
-    if not hl["foreground"] then hl["foreground"] = "NONE" end
-    if not hl["background"] then hl["background"] = "NONE" end
-    hl.fg, hl.bg, hl.sp = hl.foreground, hl.background, hl.special
-    hl.ctermfg, hl.ctermbg = hl.foreground, hl.background
+    local hl
+    if vim.api.nvim_get_hl then -- check for new neovim 0.9 API
+      hl = vim.api.nvim_get_hl(0, { name = name, link = false })
+      if not hl.fg then hl.fg = "NONE" end
+      if not hl.bg then hl.bg = "NONE" end
+    else
+      hl = vim.api.nvim_get_hl_by_name(name, vim.o.termguicolors)
+      if not hl.foreground then hl.foreground = "NONE" end
+      if not hl.background then hl.background = "NONE" end
+      hl.fg, hl.bg = hl.foreground, hl.background
+      hl.ctermfg, hl.ctermbg = hl.fg, hl.bg
+      hl.sp = hl.special
+    end
     return hl
   end
   return fallback
@@ -204,7 +213,7 @@ end
 
 --- regex used for matching a valid URL/URI string
 local url_matcher =
-  "\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
+"\\v\\c%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)%([&:#*@~%_\\-=?!+;/0-9a-z]+%(%([.;/?]|[.][.]+)[&:#*@~%_\\-=?!+/0-9a-z]+|:\\d+|,%(%(%(h?ttps?|ftp|file|ssh|git)://|[a-z]+[@][a-z]+[.][a-z]+:)@![0-9a-z]+))*|\\([&:#*@~%_\\-=?!+;/.0-9a-z]*\\)|\\[[&:#*@~%_\\-=?!+;/.0-9a-z]*\\]|\\{%([&:#*@~%_\\-=?!+;/.0-9a-z]*|\\{[&:#*@~%_\\-=?!+;/.0-9a-z]*})\\})+"
 
 --- Delete the syntax matching rules for URLs/URIs if set
 function M.delete_url_match()

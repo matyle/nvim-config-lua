@@ -101,3 +101,19 @@ function M.update_all()
 end
 
 return M
+                else
+                  notify "Mason: No updates available"
+                end
+                astroevent "MasonUpdateCompleted"
+              end
+            end
+          end)
+        end
+      end
+    else
+      notify(("Failed to update registries: %s"):format(updated_registries), vim.log.levels.ERROR)
+    end
+  end))
+end
+
+return M
