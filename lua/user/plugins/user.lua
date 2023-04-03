@@ -27,6 +27,10 @@ return {
     priority = 1000,
   },
   {
+    "mbledkowski/neuleetcode.vim",
+    lazy = false,
+  },
+  {
     "APZelos/blamer.nvim",
     lazy = false,
     config = function()
