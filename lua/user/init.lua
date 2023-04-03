@@ -17,10 +17,7 @@ return {
     },
   },
   -- Set colorscheme to use
-  -- colorscheme = "astrodark",
-  colorscheme = "tokyonight",
-  -- colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
-  -- colorscheme = "catppuccin",
+  colorscheme = "astrodark",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = true,
@@ -51,23 +48,24 @@ return {
     servers = {
       -- "pyright"
     },
-    ["server-settings"] = {
+    -- configure mason
+    config = {
       clangd = {
         capabilities = { offsetEncoding = "utf-8" },
-        filetypes = { "c", "cpp", "objc", "objcpp" },
+        filetypes = { "cc", "c", "cpp", "objc", "objcpp" }
+      }
+    }
+  },
+  -- Configure require("lazy").setup() options
+  lazy = {
+    defaults = { lazy = true },
+    performance = {
+      rtp = {
+        -- customize default disabled vim plugins
+        disabled_plugins = { "tohtml", "gzip", "matchit", "zipPlugin", "netrwPlugin", "tarPlugin" },
       },
     },
   },
-  -- Configure require("lazy").setup() options
-  -- lazy = {
-  --   defaults = { lazy = true },
-  --   performance = {
-  --     rtp = {
-  --       -- customize default disabled vim plugins
-  --       disabled_plugins = { "tohtml", "gzip", "matchit", "zipPlugin", "netrwPlugin", "tarPlugin", "matchparen" },
-  --     },
-  --   },
-  -- },
   -- This function is run last and is a good place to configuring
   -- augroups/autocommands and custom filetypes also this just pure lua so
   -- anything that doesn't fit in the normal config locations above can go here
