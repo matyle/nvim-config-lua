@@ -25,6 +25,8 @@ return {
     blamer_date_format = '%Y-%m-%d %H:%M:%S',
     vimtex_view_general_viewer = 'zathura',
     vimtex_view_method = "zathura",
+    leetcode_browser = 'chrome', -- sets vim.g.leetcode_browser
+    leetcode_china = 1
   },
 }
 -- If you need more control, you can use the function()...end notation

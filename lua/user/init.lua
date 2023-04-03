@@ -11,14 +11,11 @@ return {
     show_changelog = true, -- show the changelog after performing an update
     auto_quit = false,     -- automatically quit the current session after a successful update
     remotes = {            -- easily add new remotes to track
-      --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
-      --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
-      --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
     },
   },
   -- Set colorscheme to use
-  -- colorscheme = "astrodark",
-  colorscheme = "tokyonight",
+  colorscheme = "astrodark",
+  -- colorscheme = "tokyonight",
   -- colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
   -- colorscheme = "catppuccin",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
@@ -27,34 +24,10 @@ return {
     underline = true,
   },
   lsp = {
-    -- customize lsp formatting options
-    formatting = {
-      -- control auto formatting on save
-      format_on_save = {
-        enabled = true,     -- enable or disable format on save globally
-        allow_filetypes = { -- enable format on save for specified filetypes only
-          -- "go",
-        },
-        ignore_filetypes = { -- disable format on save for specified filetypes
-          -- "python",
-        },
-      },
-      disabled = { -- disable formatting capabilities for the listed language servers
-        -- "sumneko_lua",
-      },
-      timeout_ms = 1000, -- default format timeout
-      -- filter = function(client) -- fully override the default formatting function
-      --   return true
-      -- end
-    },
     -- enable servers that you already have installed without mason
-    servers = {
-      -- "pyright"
-    },
     ["server-settings"] = {
       clangd = {
         capabilities = { offsetEncoding = "utf-8" },
-        filetypes = { "c", "cpp", "objc", "objcpp" },
       },
     },
   },
