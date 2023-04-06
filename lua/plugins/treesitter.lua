@@ -24,9 +24,9 @@ return {
       additional_vim_regex_highlighting = false,
     },
     incremental_selection = { enable = true },
+    indent = { enable = true },
     autotag = { enable = true },
     context_commentstring = { enable = true, enable_autocmd = false },
-    indent = { enable = false },
     rainbow = {
       enable = true,
       disable = { "html" },
