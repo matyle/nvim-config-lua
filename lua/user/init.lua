@@ -17,7 +17,8 @@ return {
     },
   },
   -- Set colorscheme to use
-  colorscheme = "astrodark",
+  -- colorscheme = "astrolight",
+  colorscheme = "catppuccin",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = true,
@@ -47,12 +48,54 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+      -- "gopls"
     },
     -- configure mason
     config = {
       clangd = {
         capabilities = { offsetEncoding = "utf-8" },
         filetypes = { "cc", "c", "cpp", "objc", "objcpp" }
+      },
+      gopls = {
+        cmd = { "gopls", "serve", "-debug=localhost:8098" },
+        filetypes = { "go", "gomod", "gowork", "gotmpl" },
+        root_dir = function(fname)
+          local root_files = {
+            "go.mod",
+            ".git",
+          }
+          return require("lspconfig").util.root_pattern(unpack(root_files))(fname) or
+              require("lspconfig").util.find_git_ancestor(fname) or
+              vim.loop.os_homedir()
+        end,
+        single_file_support = true,
+      },
+      rust_analyzer = {
+        cmd = { "rust-analyzer" },
+        filetypes = { "rust", "rs" },
+        root_dir = function(fname)
+          local root_files = {
+            "Cargo.toml",
+            "rust-project.json",
+          }
+          return require("lspconfig").util.root_pattern(unpack(root_files))(fname) or
+              require("lspconfig").util.find_git_ancestor(fname) or
+              vim.loop.os_homedir()
+        end,
+        settings = {
+          ["rust-analyzer"] = {
+            assist = {
+              importGranularity = "module",
+              importPrefix = "by_self",
+            },
+            cargo = {
+              loadOutDirsFromCheck = true,
+            },
+            procMacro = {
+              enable = true,
+            },
+          },
+        },
       }
     }
   },
