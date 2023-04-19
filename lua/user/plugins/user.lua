@@ -25,6 +25,9 @@ return {
     name = "catppuccin",
     lazy = false,
     priority = 1000,
+    config = function()
+      require "user.plugins.configs.catppuccin"
+    end,
   },
   {
     "mbledkowski/neuleetcode.vim",
