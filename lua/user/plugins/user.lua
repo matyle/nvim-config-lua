@@ -68,6 +68,18 @@ return {
     "brglng/vim-im-select",
     lazy = false,
   },
+  {
+    "SmiteshP/nvim-navbuddy",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "MunifTanjim/nui.nvim"
+    },
+    opts = { lsp = { auto_attach = true } },
+    -- config = function()
+    --   require "user.plugins.configs.navbuddy"
+    -- end,
+    lazy = false,
+  },
   -- {
   --   "jackMort/ChatGPT.nvim",
   --   cmd = "ChatGPT",
@@ -105,7 +117,5 @@ return {
     "kevinhwang91/rnvimr",
     cmd = "RnvimrToggle",
   }
-
-
 
 }
