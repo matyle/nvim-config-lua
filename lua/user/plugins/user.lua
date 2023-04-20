@@ -52,6 +52,16 @@ return {
     lazy = false,
   },
   {
+    "ggandor/leap.nvim",
+    dependencies = {
+      "tpope/vim-repeat",
+    },
+    config = function()
+      require "user.plugins.configs.leap"
+    end,
+    lazy = false,
+  },
+  {
     event = "InsertEnter",
     "wakatime/vim-wakatime",
   },
