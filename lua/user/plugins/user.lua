@@ -74,11 +74,11 @@ return {
       "SmiteshP/nvim-navic",
       "MunifTanjim/nui.nvim"
     },
-    opts = { lsp = { auto_attach = true } },
-    -- config = function()
-    --   require "user.plugins.configs.navbuddy"
-    -- end,
+    -- opts = { lsp = { auto_attach = true } },
     lazy = false,
+    config = function()
+      require "user.plugins.configs.navbuddy"
+    end,
   },
   -- {
   --   "jackMort/ChatGPT.nvim",
