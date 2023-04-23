@@ -22,7 +22,8 @@ return {
     -- tables with the `name` key will be registered with which-key if it's installed
     -- this is useful for naming menus
     ["<leader>b"] = { name = "Buffers" },
-    ["<leader>ln"] = { "<cmd>Navbuddy<cr>", desc = "Navbuddy" }
+    ["<leader>ln"] = { "<cmd>Navbuddy<cr>", desc = "Navbuddy" },
+    ["<leader>ts"] = { "<cmd>TranslateW<cr>", desc = "trans" }
     -- quick save
     -- ["<C-s>"] = { ":w!<cr>", desc = "Save File" },  -- change description but the same command
   },

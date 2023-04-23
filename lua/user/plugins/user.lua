@@ -33,8 +33,12 @@ return {
     "github/copilot.vim",
   },
   {
+    "voldikss/vim-translator",
+    lazy = false,
+  },
+  {
     "Exafunction/codeium.vim",
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     config = function()
       -- Change '<C-g>' here to any keycode you like.
       vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true })
@@ -76,6 +80,10 @@ return {
   {
     "brglng/vim-im-select",
     lazy = false,
+  },
+  {
+    "will133/vim-dirdiff",
+    cmd = "DirDiff",
   },
   {
     "SmiteshP/nvim-navbuddy",
