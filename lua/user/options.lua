@@ -9,6 +9,8 @@ return {
     wrap = false,          -- sets vim.opt.wrap
     cursorline = true,     -- sets vim.opt.cursorline
     swapfile = false,      -- sets vim.opt.swapfile
+    autoindent = true,     -- sets vim.opt.autoindent
+    autoread = true,       -- sets vim.opt.autoread
   },
   g = {
     mapleader = " ",                 -- sets vim.g.mapleader
@@ -38,4 +40,5 @@ return {
 --
 --
 --   return local_vim
+-- end
 -- end

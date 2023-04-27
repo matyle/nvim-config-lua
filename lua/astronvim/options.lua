@@ -12,7 +12,6 @@ local options = astronvim.user_opts("options", {
     copyindent = true,                                          -- Copy the previous indentation on autoindenting
     cursorline = true,                                          -- Highlight the text line of the cursor
     autoindent = true,                                          -- Autoindent new lines
-    smartindent = true,                                         -- Smart autoindentation
     expandtab = true,                                           -- Enable the use of space in tab
     fileencoding = "utf-8",                                     -- File content encoding for the buffer
     fillchars = { eob = " " },                                  -- Disable `~` on nonexistent lines
@@ -49,6 +48,10 @@ local options = astronvim.user_opts("options", {
     virtualedit = "block",                                      -- allow going past end of line in visual block mode
     wrap = false,                                               -- Disable wrapping of lines longer than the width of window
     writebackup = false,                                        -- Disable making a backup before overwriting a file
+    hidden = true,                                              -- Enable background buffers
+    autoread = true,                                            -- Enable auto read
+    autowrite = true,                                           -- Enable auto write
+    autowriteall = true,                                        -- Enable auto write all
   },
   g = {
     highlighturl_enabled = true,           -- highlight URLs by default
