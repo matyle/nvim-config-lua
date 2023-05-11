@@ -497,7 +497,7 @@ vim.api.nvim_buf_set_keymap(0, 'n', 'tv', ':VimtexView<CR>', { noremap = true })
 --far 全局查找替换
 vim.api.nvim_set_keymap('n', '<leader>fr', ':Farr<CR>', { noremap = true, silent = true })
 
-vim.api.nvim_set_keymap('n', '<leader>tr', ':RnvimrToggle<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader>tr', ':RnvimrToggle<CR>', { noremap = true, silent = true })
 
 
 --fzf

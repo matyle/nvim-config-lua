@@ -1,3 +1,4 @@
+
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local cmd = vim.api.nvim_create_user_command
@@ -15,7 +16,7 @@ vim.on_key(function(char)
 end, namespace "auto_hlsearch")
 
 local bufferline_group = augroup("bufferline", { clear = true })
-autocmd({ "BufAdd", "BufEnter" }, {
+autocmd({ "BufAdd", "BufEnter", "TabNewEntered" }, {
   desc = "Update buffers when adding new buffers",
   group = bufferline_group,
   callback = function(args)
@@ -85,9 +86,12 @@ autocmd("BufWinEnter", {
 autocmd("BufWinEnter", {
   desc = "Make q close help, man, quickfix, dap floats",
   group = augroup("q_close_windows", { clear = true }),
-  pattern = { "qf", "help", "man", "dap-float" },
   callback = function(event)
-    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, nowait = true })
+    local filetype = vim.api.nvim_get_option_value("filetype", { buf = event.buf })
+    local buftype = vim.api.nvim_get_option_value("buftype", { buf = event.buf })
+    if buftype == "nofile" or filetype == "help" then
+      vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true, nowait = true })
+    end
   end,
 })
 
@@ -112,7 +116,7 @@ autocmd("BufEnter", {
     local wins = vim.api.nvim_tabpage_list_wins(0)
     -- Both neo-tree and aerial will auto-quit if there is only a single window left
     if #wins <= 1 then return end
-    local sidebar_fts = { aerial = true,["neo-tree"] = true }
+    local sidebar_fts = { aerial = true, ["neo-tree"] = true }
     for _, winid in ipairs(wins) do
       if vim.api.nvim_win_is_valid(winid) then
         local bufnr = vim.api.nvim_win_get_buf(winid)
@@ -120,7 +124,7 @@ autocmd("BufEnter", {
         -- If any visible windows are not sidebars, early return
         if not sidebar_fts[filetype] then
           return
-          -- If the visible window is a sidebar
+        -- If the visible window is a sidebar
         else
           -- only count filetypes once, so remove a found sidebar from the detection
           sidebar_fts[filetype] = nil
@@ -135,25 +139,39 @@ autocmd("BufEnter", {
   end,
 })
 
+-- HACK: Make sure start in insert mode after selecting something from Telescope, remove once fixed upstream
+-- Introduced in Neovim: https://github.com/neovim/neovim/pull/22984
+-- Relevant Telescope Issues: https://github.com/nvim-telescope/telescope.nvim/issues/2027, https://github.com/nvim-telescope/telescope.nvim/issues/1457
+if is_available "telescope.nvim" then
+  autocmd("WinLeave", {
+    desc = "Make sure insert mode is left when leaving the telescope prompt",
+    group = augroup("telescope_exist_insert", { clear = true }),
+    callback = function()
+      if vim.bo.ft == "TelescopePrompt" and vim.fn.mode() == "i" then
+        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "i", false)
+      end
+    end,
+  })
+end
+
 if is_available "alpha-nvim" then
   local group_name = augroup("alpha_settings", { clear = true })
-  autocmd("User", {
+  autocmd({ "User", "BufEnter" }, {
     desc = "Disable status and tablines for alpha",
     group = group_name,
-    pattern = "AlphaReady",
-    callback = function()
-      local prev_showtabline = vim.opt.showtabline
-      local prev_status = vim.opt.laststatus
-      vim.opt.laststatus = 0
-      vim.opt.showtabline = 0
-      vim.opt_local.winbar = nil
-      autocmd("BufUnload", {
-        pattern = "<buffer>",
-        callback = function()
-          vim.opt.laststatus = prev_status
-          vim.opt.showtabline = prev_showtabline
-        end,
-      })
+    callback = function(event)
+      local filetype = vim.api.nvim_get_option_value("filetype", { buf = event.buf })
+      local buftype = vim.api.nvim_get_option_value("buftype", { buf = event.buf })
+      if
+        ((event.event == "User" and event.file == "AlphaReady") or (event.event == "BufEnter" and filetype == "alpha"))
+        and not vim.g.before_alpha
+      then
+        vim.g.before_alpha = { showtabline = vim.opt.showtabline:get(), laststatus = vim.opt.laststatus:get() }
+        vim.opt.showtabline, vim.opt.laststatus = 0, 0
+      elseif vim.g.before_alpha and event.event == "BufEnter" and buftype ~= "nofile" then
+        vim.opt.laststatus, vim.opt.showtabline = vim.g.before_alpha.laststatus, vim.g.before_alpha.showtabline
+        vim.g.before_alpha = nil
+      end
     end,
   })
   autocmd("VimEnter", {
@@ -161,7 +179,7 @@ if is_available "alpha-nvim" then
     group = group_name,
     callback = function()
       local should_skip = false
-      if vim.fn.argc() > 0 or vim.fn.line2byte "$" ~= -1 or not vim.o.modifiable then
+      if vim.fn.argc() > 0 or vim.fn.line2byte(vim.fn.line "$") ~= -1 or not vim.o.modifiable then
         should_skip = true
       else
         for _, arg in pairs(vim.v.argv) do
@@ -176,6 +194,18 @@ if is_available "alpha-nvim" then
   })
 end
 
+if is_available "resession.nvim" then
+  autocmd("VimLeavePre", {
+    desc = "Save session on close",
+    group = augroup("resession_auto_save", { clear = true }),
+    callback = function()
+      local save = require("resession").save
+      save "Last Session"
+      save(vim.fn.getcwd(), { dir = "dirsession", notify = false })
+    end,
+  })
+end
+
 if is_available "neo-tree.nvim" then
   autocmd("BufEnter", {
     desc = "Open Neo-Tree on startup with directory",
@@ -186,9 +216,8 @@ if is_available "neo-tree.nvim" then
       else
         local stats = vim.loop.fs_stat(vim.api.nvim_buf_get_name(0))
         if stats and stats.type == "directory" then
-          require "neo-tree"
           vim.api.nvim_del_augroup_by_name "neotree_start"
-          vim.api.nvim_exec_autocmds("BufEnter", {})
+          require "neo-tree"
         end
       end
     end,
@@ -211,6 +240,7 @@ autocmd({ "VimEnter", "ColorScheme" }, {
 })
 
 autocmd({ "BufReadPost", "BufNewFile" }, {
+  desc = "AstroNvim user events for file detection (AstroFile and AstroGitFile)",
   group = augroup("file_user_events", { clear = true }),
   callback = function(args)
     if not (vim.fn.expand "%" == "" or vim.api.nvim_get_option_value("buftype", { buf = args.buf }) == "nofile") then
@@ -220,14 +250,24 @@ autocmd({ "BufReadPost", "BufNewFile" }, {
   end,
 })
 
-autocmd("FocusLost,BufLeave", {
-  desc = "Save when losing focus or leaving the current buffer",
-  group = augroup("auto_save", { clear = true }),
-  callback = function()
-    vim.cmd("silent! update")
-  end,
-})
+cmd(
+  "AstroChangelog",
+  function() require("astronvim.utils.updater").changelog() end,
+  { desc = "Check AstroNvim Changelog" }
+)
+cmd(
+  "AstroUpdatePackages",
+  function() require("astronvim.utils.updater").update_packages() end,
+  { desc = "Update Plugins and Mason" }
+)
+cmd("AstroRollback", function() require("astronvim.utils.updater").rollback() end, { desc = "Rollback AstroNvim" })
+cmd("AstroUpdate", function() require("astronvim.utils.updater").update() end, { desc = "Update AstroNvim" })
+cmd("AstroVersion", function() require("astronvim.utils.updater").version() end, { desc = "Check AstroNvim Version" })
+cmd("AstroReload", function() require("astronvim.utils").reload() end, { desc = "Reload AstroNvim (Experimental)" })
 
+
+
+-- user define--------
 autocmd("InsertLeave", {
   desc = "Save when leaving insert mode",
   group = augroup("auto_save", { clear = true }),
@@ -245,24 +285,6 @@ autocmd("FileType", {
     vim.opt_local.textwidth = 80
   end,
 })
-
-
-cmd(
-  "AstroChangelog",
-  function() require("astronvim.utils.updater").changelog() end,
-  { desc = "Check AstroNvim Changelog" }
-)
-cmd(
-  "AstroUpdatePackages",
-  function() require("astronvim.utils.updater").update_packages() end,
-  { desc = "Update Plugins and Mason" }
-)
-cmd("AstroRollback", function() require("astronvim.utils.updater").rollback() end, { desc = "Rollback AstroNvim" })
-cmd("AstroUpdate", function() require("astronvim.utils.updater").update() end, { desc = "Update AstroNvim" })
-cmd("AstroVersion", function() require("astronvim.utils.updater").version() end, { desc = "Check AstroNvim Version" })
-
-
-
 vim.cmd([[
   autocmd FileType tex   set textwidth=80
 ]])

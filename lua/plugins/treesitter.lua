@@ -21,18 +21,12 @@ return {
   opts = {
     highlight = {
       enable = true,
-      additional_vim_regex_highlighting = false,
+      disable = function(_, bufnr) return vim.api.nvim_buf_line_count(bufnr) > 10000 end,
     },
     incremental_selection = { enable = true },
     indent = { enable = true },
     autotag = { enable = true },
     context_commentstring = { enable = true, enable_autocmd = false },
-    rainbow = {
-      enable = true,
-      disable = { "html" },
-      extended_mode = false,
-      max_file_lines = nil,
-    },
   },
   config = require "plugins.configs.nvim-treesitter",
 }

@@ -82,21 +82,23 @@ function M.toggle_buffer_autoformat()
 end
 
 --- Toggle buffer semantic token highlighting for all language servers that support it
--- @param bufnr the buffer to toggle the clients on
+---@param bufnr? number the buffer to toggle the clients on
 function M.toggle_buffer_semantic_tokens(bufnr)
   vim.b.semantic_tokens_enabled = vim.b.semantic_tokens_enabled == false
 
   for _, client in ipairs(vim.lsp.get_active_clients()) do
     if client.server_capabilities.semanticTokensProvider then
       vim.lsp.semantic_tokens[vim.b.semantic_tokens_enabled and "start" or "stop"](bufnr or 0, client.id)
+      ui_notify(string.format("Buffer lsp semantic highlighting %s", bool2str(vim.b.semantic_tokens_enabled)))
     end
   end
 end
 
---- Toggle codelens refresh
+--- Toggle codelens
 function M.toggle_codelens()
   vim.g.codelens_enabled = not vim.g.codelens_enabled
-  ui_notify(string.format("CodeLens refresh %s", bool2str(vim.g.codelens_enabled)))
+  if not vim.g.codelens_enabled then vim.lsp.codelens.clear() end
+  ui_notify(string.format("CodeLens %s", bool2str(vim.g.codelens_enabled)))
 end
 
 --- Toggle showtabline=2|0
@@ -148,16 +150,16 @@ function M.set_indent()
     if not indent or indent == 0 then return end
     vim.bo.expandtab = (indent > 0) -- local to buffer
     indent = math.abs(indent)
-    vim.bo.tabstop = indent         -- local to buffer
-    vim.bo.softtabstop = indent     -- local to buffer
-    vim.bo.shiftwidth = indent      -- local to buffer
+    vim.bo.tabstop = indent -- local to buffer
+    vim.bo.softtabstop = indent -- local to buffer
+    vim.bo.shiftwidth = indent -- local to buffer
     ui_notify(string.format("indent=%d %s", indent, vim.bo.expandtab and "expandtab" or "noexpandtab"))
   end
 end
 
 --- Change the number display modes
 function M.change_number()
-  local number = vim.wo.number                 -- local to window
+  local number = vim.wo.number -- local to window
   local relativenumber = vim.wo.relativenumber -- local to window
   if not number and not relativenumber then
     vim.wo.number = true
@@ -194,7 +196,7 @@ function M.toggle_syntax()
   local ts_avail, parsers = pcall(require, "nvim-treesitter.parsers")
   if vim.g.syntax_on then -- global var for on//off
     if ts_avail and parsers.has_parser() then vim.cmd.TSBufDisable "highlight" end
-    vim.cmd.syntax "off"  -- set vim.g.syntax_on = false
+    vim.cmd.syntax "off" -- set vim.g.syntax_on = false
   else
     if ts_avail and parsers.has_parser() then vim.cmd.TSBufEnable "highlight" end
     vim.cmd.syntax "on" -- set vim.g.syntax_on = true
@@ -206,6 +208,15 @@ end
 function M.toggle_url_match()
   vim.g.highlighturl_enabled = not vim.g.highlighturl_enabled
   require("astronvim.utils").set_url_match()
+end
+
+local last_active_foldcolumn
+--- Toggle foldcolumn=0|1
+function M.toggle_foldcolumn()
+  local curr_foldcolumn = vim.wo.foldcolumn
+  if curr_foldcolumn ~= "0" then last_active_foldcolumn = curr_foldcolumn end
+  vim.wo.foldcolumn = curr_foldcolumn == "0" and (last_active_foldcolumn or "1") or "0"
+  ui_notify(string.format("foldcolumn=%s", vim.wo.foldcolumn))
 end
 
 return M
