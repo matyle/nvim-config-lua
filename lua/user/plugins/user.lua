@@ -129,10 +129,10 @@ return {
   },
   {
     "sindrets/diffview.nvim"
-  },
-  {
-    "kevinhwang91/rnvimr",
-    cmd = "RnvimrToggle",
   }
+  -- {
+  --   "kevinhwang91/rnvimr",
+  --   cmd = "RnvimrToggle",
+  -- }
 
 }
