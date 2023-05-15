@@ -125,5 +125,6 @@ return {
     --     ["~/%.config/foo/.*"] = "fooscript",
     --   },
     -- }
+    vim.opt.autochdir = true
   end,
 }

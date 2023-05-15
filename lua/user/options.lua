@@ -28,6 +28,7 @@ return {
     vimtex_view_general_viewer = 'zathura',
     vimtex_view_method = "zathura",
     leetcode_browser = 'chrome', -- sets vim.g.leetcode_browser
+    autochdir = true,            -- sets vim.g.autochdir
     leetcode_china = 1
   },
 }
