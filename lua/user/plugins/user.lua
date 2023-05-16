@@ -1,11 +1,11 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
+    lazy = false, -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- load the colorscheme here
-      vim.cmd([[colorscheme tokyonight]])
+      vim.cmd [[colorscheme tokyonight]]
     end,
   },
   {
@@ -13,9 +13,7 @@ return {
     name = "catppuccin",
     lazy = false,
     priority = 1000,
-    config = function()
-      require "user.plugins.configs.catppuccin"
-    end,
+    config = function() require "user.plugins.configs.catppuccin" end,
   },
   {
     "mbledkowski/neuleetcode.vim",
@@ -24,9 +22,7 @@ return {
   {
     "APZelos/blamer.nvim",
     lazy = false,
-    config = function()
-      require "user.plugins.configs.blamer"
-    end,
+    config = function() require "user.plugins.configs.blamer" end,
   },
   {
     event = "InsertEnter",
@@ -37,11 +33,11 @@ return {
     event = "InsertEnter",
     config = function()
       -- Change '<C-g>' here to any keycode you like.
-      vim.keymap.set('i', '<C-g>', function() return vim.fn['codeium#Accept']() end, { expr = true })
-      vim.keymap.set('i', '<c-;>', function() return vim.fn['codeium#CycleCompletions'](1) end, { expr = true })
-      vim.keymap.set('i', '<c-,>', function() return vim.fn['codeium#CycleCompletions'](-1) end, { expr = true })
-      vim.keymap.set('i', '<c-x>', function() return vim.fn['codeium#Clear']() end, { expr = true })
-    end
+      vim.keymap.set("i", "<C-g>", function() return vim.fn["codeium#Accept"]() end, { expr = true })
+      vim.keymap.set("i", "<c-;>", function() return vim.fn["codeium#CycleCompletions"](1) end, { expr = true })
+      vim.keymap.set("i", "<c-,>", function() return vim.fn["codeium#CycleCompletions"](-1) end, { expr = true })
+      vim.keymap.set("i", "<c-x>", function() return vim.fn["codeium#Clear"]() end, { expr = true })
+    end,
   },
   {
     "gcmt/wildfire.vim",
@@ -49,6 +45,14 @@ return {
   },
   {
     "brooth/far.vim",
+    lazy = false,
+  },
+  {
+    "ggandor/leap.nvim",
+    dependencies = {
+      "tpope/vim-repeat",
+    },
+    config = function() require "user.plugins.configs.leap" end,
     lazy = false,
   },
   {
@@ -71,13 +75,11 @@ return {
     "SmiteshP/nvim-navbuddy",
     dependencies = {
       "SmiteshP/nvim-navic",
-      "MunifTanjim/nui.nvim"
+      "MunifTanjim/nui.nvim",
     },
     -- opts = { lsp = { auto_attach = true } },
     lazy = false,
-    config = function()
-      require "user.plugins.configs.navbuddy"
-    end,
+    config = function() require "user.plugins.configs.navbuddy" end,
   },
   -- {
   --   "jackMort/ChatGPT.nvim",
