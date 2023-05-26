@@ -1,7 +1,7 @@
 return {
   {
     "folke/tokyonight.nvim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
+    lazy = false,    -- make sure we load this during startup if it is your main colorscheme
     priority = 1000, -- make sure to load this before all the other start plugins
     config = function()
       -- load the colorscheme here
@@ -137,11 +137,11 @@ return {
     event = "LspAttach",
     config = function() require "user.plugins.configs.fidget" end,
   },
-  {
-    "lewis6991/gitsigns.nvim",
-    event = { "CursorHold", "CursorHoldI" },
-    config = function() require "user.plugins.configs.gitsigns" end,
-  },
+  -- {
+  --   "lewis6991/gitsigns.nvim",
+  --   event = { "CursorHold", "CursorHoldI" },
+  --   config = function() require "user.plugins.configs.gitsigns" end,
+  -- },
   {
     "karb94/neoscroll.nvim",
     event = "BufReadPost",
