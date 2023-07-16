@@ -1,16 +1,16 @@
 return {
   -- Configure AstroNvim updates
   updater = {
-    remote = "origin",     -- remote to use
-    channel = "stable",    -- "stable" or "nightly"
-    version = "latest",    -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
-    branch = "nightly",    -- branch name (NIGHTLY ONLY)
-    commit = nil,          -- commit hash (NIGHTLY ONLY)
-    pin_plugins = nil,     -- nil, true, false (nil will pin plugins on stable only)
-    skip_prompts = false,  -- skip prompts about breaking changes
+    remote = "origin", -- remote to use
+    channel = "stable", -- "stable" or "nightly"
+    version = "latest", -- "latest", tag name, or regex search like "v1.*" to only do updates before v2 (STABLE ONLY)
+    branch = "nightly", -- branch name (NIGHTLY ONLY)
+    commit = nil, -- commit hash (NIGHTLY ONLY)
+    pin_plugins = nil, -- nil, true, false (nil will pin plugins on stable only)
+    skip_prompts = false, -- skip prompts about breaking changes
     show_changelog = true, -- show the changelog after performing an update
-    auto_quit = false,     -- automatically quit the current session after a successful update
-    remotes = {            -- easily add new remotes to track
+    auto_quit = false, -- automatically quit the current session after a successful update
+    remotes = { -- easily add new remotes to track
       --   ["remote_name"] = "https://remote_url.come/repo.git", -- full remote url
       --   ["remote2"] = "github_user/repo", -- GitHub user/repo shortcut,
       --   ["remote3"] = "github_user", -- GitHub user assume AstroNvim fork
@@ -18,7 +18,8 @@ return {
   },
   -- Set colorscheme to use
   -- colorscheme = "astrolight",
-  colorscheme = "catppuccin",
+  colorscheme = "astrodark",
+  -- colorscheme = "catppuccin",
   -- Diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
   diagnostics = {
     virtual_text = true,
@@ -29,7 +30,7 @@ return {
     formatting = {
       -- control auto formatting on save
       format_on_save = {
-        enabled = true,     -- enable or disable format on save globally
+        enabled = true, -- enable or disable format on save globally
         allow_filetypes = { -- enable format on save for specified filetypes only
           -- "go",
         },
@@ -54,7 +55,7 @@ return {
     config = {
       clangd = {
         capabilities = { offsetEncoding = "utf-8" },
-        filetypes = { "cc", "c", "cpp", "objc", "objcpp" }
+        filetypes = { "cc", "c", "cpp", "objc", "objcpp" },
       },
       gopls = {
         cmd = { "gopls", "serve", "-debug=localhost:8098" },
@@ -64,9 +65,9 @@ return {
             "go.mod",
             ".git",
           }
-          return require("lspconfig").util.root_pattern(unpack(root_files))(fname) or
-              require("lspconfig").util.find_git_ancestor(fname) or
-              vim.loop.os_homedir()
+          return require("lspconfig").util.root_pattern(unpack(root_files))(fname)
+            or require("lspconfig").util.find_git_ancestor(fname)
+            or vim.loop.os_homedir()
         end,
         single_file_support = true,
       },
@@ -78,9 +79,9 @@ return {
             "Cargo.toml",
             "rust-project.json",
           }
-          return require("lspconfig").util.root_pattern(unpack(root_files))(fname) or
-              require("lspconfig").util.find_git_ancestor(fname) or
-              vim.loop.os_homedir()
+          return require("lspconfig").util.root_pattern(unpack(root_files))(fname)
+            or require("lspconfig").util.find_git_ancestor(fname)
+            or vim.loop.os_homedir()
         end,
         settings = {
           ["rust-analyzer"] = {
@@ -96,8 +97,8 @@ return {
             },
           },
         },
-      }
-    }
+      },
+    },
   },
   -- Configure require("lazy").setup() options
   lazy = {

@@ -51,14 +51,14 @@ return {
     "brooth/far.vim",
     lazy = false,
   },
-  {
-    "ggandor/leap.nvim",
-    dependencies = {
-      "tpope/vim-repeat",
-    },
-    config = function() require "user.plugins.configs.leap" end,
-    lazy = false,
-  },
+  -- {
+  --   "ggandor/leap.nvim",
+  --   dependencies = {
+  --     "tpope/vim-repeat",
+  --   },
+  --   config = function() require "user.plugins.configs.leap" end,
+  --   lazy = false,
+  -- },
   {
     event = "InsertEnter",
     "wakatime/vim-wakatime",
@@ -89,17 +89,6 @@ return {
     lazy = false,
     config = function() require "user.plugins.configs.navbuddy" end,
   },
-  -- {
-  --   "jackMort/ChatGPT.nvim",
-  --   cmd = "ChatGPT",
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "nvim-telescope/telescope.nvim",
-  --   },
-  --   config = function()
-  --     require "user.plugins.configs.chatgpt"
-  --   end,
-  -- },
   {
     "nvim-lua/plenary.nvim",
   },
@@ -170,5 +159,10 @@ return {
   {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
+  },
+  {
+    "folke/flash.nvim",
+    event = { "VeryLazy" },
+    config = function() require "user.plugins.configs.flash" end,
   },
 }
